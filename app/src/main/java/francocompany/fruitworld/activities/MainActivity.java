@@ -39,25 +39,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//Casteo
+        //Casteo
         lVFruta=(ListView)findViewById(R.id.lv_Frutas);
         gVFruta=(GridView)findViewById(R.id.gv_Frutas);
 
         //Action bar configuracion
         this.forzarIcono();
 
+        //Llamamos al metodo para obtener las frutas de la clase Fruta
         this.obtenerfrutas();
-
+        //Le designamos a la lista de List<Frutas> las frutas que tiene que cargar
         this.frutas=obtenerfrutas();
 
-        this.lVFruta.setOnItemClickListener(this);
-        //Adaptador
+
+        //Adaptadores para cada View
         this.adaptadorListView = new myAdaptador1(this,R.layout.list_item_frutas,frutas);
         this.lVFruta.setAdapter(adaptadorListView);
 
         this.adaptadorGirdView = new myAdaptador1(this,R.layout.grid_item_frutas,frutas);
         this.gVFruta.setAdapter(adaptadorGirdView);
 
+        //Configuramos los clicks en cada vista
+        this.gVFruta.setOnItemClickListener(this);
+        this.lVFruta.setOnItemClickListener(this);
         //Registramos el COntext Menu
         registerForContextMenu(lVFruta);
         registerForContextMenu(gVFruta);
@@ -73,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     // CRUD action: crear añadir, borrar
 
-
+    //Cargamos las frutas en el array de Lis<Frutas> utilizando la clase frutas
     public List<Frutas> obtenerfrutas(){
         List<Frutas> lista= new ArrayList<Frutas>(){
             {
